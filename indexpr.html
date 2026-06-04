@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Which Friend Are You?</title>
+
+    <style>
+        body {
+            background-color: #f6d6e6;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            color: #3b2f2f;
+        }
+
+        .page-box {
+            background-color: white;
+            width: 70%;
+            margin: 60px auto;
+            padding: 30px;
+            border-radius: 25px;
+            box-shadow: 5px 5px 15px gray;
+        }
+
+        button {
+            display: block;
+            width: 80%;
+            margin: 15px auto;
+            padding: 15px;
+            border-radius: 20px;
+            border: none;
+            font-size: 18px;
+            cursor: pointer;
+            background-color: #e8a8c9;
+        }
+
+        button:hover {
+            background-color: #d98bb8;
+        }
+
+        .question {
+            display: none;
+        }
+
+        #quizContainer {
+            display: none;
+        }
+
+        #result {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="startPage" class="page-box">
+        <h1>✨ Which Friend Are You? ✨</h1>
+        <p>Find out which member of the friend group you truly are.</p>
+        <img src="quizpic/friendsstart.png"
+        style="width:350px; height:auto;"> 
+        <button onclick="startQuiz()">Start Quiz</button>
+    </div>
+
+    <div id="quizContainer" class="page-box">
+
+        <div id="question1" class="question">
+            <h2>The group chat has been dead all day. You...</h2>
+            <button onclick="answer('friend5', 2)">📸 Send a random picture</button>
+            <button onclick="answer('friend1', 2)">😂 Send a meme</button>
+            <button onclick="answer('friend3', 2)">💬 Ask a completely random question</button>
+            <button onclick="answer('friend6', 2)">👀 Read everything but don't respond</button>
+            <button onclick="answer('friend2', 2)">✨ Drop major news and disappear</button>
+            <button onclick="answer('friend4', 2)">📞 Always responds no matter the text</button>
+        </div>
+
+        <div id="question2" class="question">
+            <h2>The playlist gets passed to you. What are you putting on?</h2>
+            <button onclick="answer('friend6', 3)">Throwback songs</button>
+            <button onclick="answer('friend5', 3)">A song nobody expects</button>
+            <button onclick="answer('friend3', 3)">Whatever matches the vibe</button>
+            <button onclick="answer('friend1', 3)">Songs to sing to</button>
+            <button onclick="answer('friend2', 3)">Does not put music, but gives recommendations</button>
+            <button onclick="answer('friend4', 3)">Whatever playlist they see fit</button>
+        </div>
+
+        <div id="question3" class="question">
+            <h2>We are going on a trip. What are you doing?</h2>
+            <button onclick="answer('friend2', 4)">Creates the itinerary</button>
+            <button onclick="answer('friend3', 4)">Takes aesthetic pictures</button>
+            <button onclick="answer('friend6', 4)">Goes with the flow</button>
+            <button onclick="answer('friend1', 4)">Finds local coffee shops</button>
+            <button onclick="answer('friend5', 4)">Somehow packs last minute</button>
+            <button onclick="answer('friend4', 4)">Is somehow running late</button>
+        </div>
+
+        <div id="question4" class="question">
+            <h2>Everyone is getting ready for a night out. What are you doing?</h2>
+            <button onclick="answer('friend4', 5)">Finishing up makeup</button>
+            <button onclick="answer('friend5', 5)">Blowing out your hair</button>
+            <button onclick="answer('friend6', 5)">Pouring drinks</button>
+            <button onclick="answer('friend3', 5)">DJ’ing</button>
+            <button onclick="answer('friend1', 5)">Dancing to the music</button>
+            <button onclick="answer('friend2', 5)">Taking pictures with/of everyone</button>
+        </div>
+
+        <div id="question5" class="question">
+            <h2>It's movie night. What's your role?</h2>
+            <button onclick="answer('friend2', 6)">Suggested we do movie night</button>
+            <button onclick="answer('friend3', 6)">Pick out the movie</button>
+            <button onclick="answer('friend1', 6)">Grab the snacks</button>
+            <button onclick="answer('friend5', 6)">Does not care, just wants to be with the group</button>
+            <button onclick="answer('friend6', 6)">Talking during the movie</button>
+            <button onclick="answer('friend4', 6)">Pausing the movie to pee</button>
+        </div>
+
+        <div id="question6" class="question">
+            <h2>The Uber is arriving. Where are you?</h2>
+            <button onclick="answer('friend1', 7)">I ordered the Uber</button>
+            <button onclick="answer('friend5', 7)">Picking a pair of shoes to wear</button>
+            <button onclick="answer('friend4', 7)">Finishing getting ready</button>
+            <button onclick="answer('friend3', 7)">Looking for something you lost</button>
+            <button onclick="answer('friend6', 7)">Ready, and waiting for everyone</button>
+            <button onclick="answer('friend2', 7)">Still in conversation with someone</button>
+        </div>
+
+        <div id="question7" class="question">
+            <h2>It's 1 AM, everyone is tired. You...</h2>
+            <button onclick="answer('friend1', 'result')">Are already asleep</button>
+            <button onclick="answer('friend3', 'result')">Start a deep convo</button>
+            <button onclick="answer('friend2', 'result')">Want to eat McDonald's</button>
+            <button onclick="answer('friend6', 'result')">Somehow get more energetic</button>
+            <button onclick="answer('friend4', 'result')">Are on FaceTime</button>
+            <button onclick="answer('friend5', 'result')">Doing their nails</button>
+        </div>
+
+       <div id="result">
+        <h2 id="resultTitle"></h2>
+
+        <img id="resultImage"
+     style="width:300px; height:250px; object-fit:cover; border-radius:20px;">
+
+        <p id="resultDescription"></p>
+        </div>
+
+    </div>
+
+    <script>
+        let friend1 = 0;
+        let friend2 = 0;
+        let friend3 = 0;
+        let friend4 = 0;
+        let friend5 = 0;
+        let friend6 = 0;
+
+        function startQuiz() {
+            document.getElementById("startPage").style.display = "none";
+            document.getElementById("quizContainer").style.display = "block";
+            document.getElementById("question1").style.display = "block";
+        }
+
+        function answer(friend, nextQuestion) {
+            if (friend === 'friend1') {
+                friend1++;
+            } else if (friend === 'friend2') {
+                friend2++;
+            } else if (friend === 'friend3') {
+                friend3++;
+            } else if (friend === 'friend4') {
+                friend4++;
+            } else if (friend === 'friend5') {
+                friend5++;
+            } else if (friend === 'friend6') {
+                friend6++;
+            }
+
+            let questions = document.getElementsByClassName("question");
+
+            for (let i = 0; i < questions.length; i++) {
+                questions[i].style.display = "none";
+            }
+
+            if (nextQuestion === 'result') {
+                showResult();
+            } else {
+                document.getElementById("question" + nextQuestion).style.display = "block";
+            }
+        }
+
+        function showResult() {
+            document.getElementById("result").style.display = "block";
+
+            let winner = "friend1";
+            let highestScore = friend1;
+
+            if (friend2 > highestScore) {
+                winner = "friend2";
+                highestScore = friend2;
+            }
+
+            if (friend3 > highestScore) {
+                winner = "friend3";
+                highestScore = friend3;
+            }
+
+            if (friend4 > highestScore) {
+                winner = "friend4";
+                highestScore = friend4;
+            }
+
+            if (friend5 > highestScore) {
+                winner = "friend5";
+                highestScore = friend5;
+            }
+
+            if (friend6 > highestScore) {
+                winner = "friend6";
+                highestScore = friend6;
+            }
+
+            if (winner === "friend1") {
+                document.getElementById("resultTitle").innerHTML = "You got Kiara!";
+                document.getElementById("resultImage").src = "quizpic/kiara.jpg";
+                document.getElementById("resultDescription").innerHTML = "The one who brings the fun, grabs the snacks, orders the Uber, and somehow is already asleep by 1 AM.";
+            } else if (winner === "friend2") {
+                document.getElementById("resultTitle").innerHTML = "You got MJ!";
+                document.getElementById("resultImage").src = "quizpic/MJ.png";
+                document.getElementById("resultDescription").innerHTML = "The planner, the photo taker, the one with updates, and the person who somehow always has a full story to tell.";
+            } else if (winner === "friend3") {
+                document.getElementById("resultTitle").innerHTML = "You got Pame!";
+                document.getElementById("resultImage").src = "quizpic/Pame.png";
+                document.getElementById("resultDescription").innerHTML = "The vibe curator, deep conversation starter, aesthetic picture taker, and the one who asks random questions in the group chat.";
+            } else if (winner === "friend4") {
+                document.getElementById("resultTitle").innerHTML = "You got Ana K!";
+                document.getElementById("resultImage").src = "quizpic/ana.jpg";
+                document.getElementById("resultDescription").innerHTML = "The one who always responds, is somehow still getting ready, and is probably on FaceTime while everyone is waiting.";
+            } else if (winner === "friend5") {
+                document.getElementById("resultTitle").innerHTML = "You got Isa!";
+                document.getElementById("resultImage").src = "quizpic/isa.png";
+                document.getElementById("resultDescription").innerHTML = "The spontaneous one, always doing something unexpected, packing last minute, and still picking the perfect shoes.";
+            } else if (winner === "friend6") {
+                document.getElementById("resultTitle").innerHTML = "You got Kristel!";
+                document.getElementById("resultImage").src = "quizpic/kristel.png";
+                document.getElementById("resultDescription").innerHTML = "The chill but chaotic one: reads the group chat, goes with the flow, and somehow gets more energetic at 1 AM.";
+            }
+        }
+    </script>
+
+</body>
+</html>

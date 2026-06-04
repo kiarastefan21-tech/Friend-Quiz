@@ -1,0 +1,19 @@
+.question {
+    display: none;
+}
+
+#quizContainer {
+    display: none;
+}
+
+#result {
+    display: none;
+}
+.result-pic {
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 20px;
+    margin: 20px auto;
+    display: block;
+}
